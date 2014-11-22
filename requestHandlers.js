@@ -1,21 +1,52 @@
-function start() {
+//requestHandler file, handles various requests based on the url and returns content.
+
+var exec = require("child_process").exec;
+
+
+function start(response) {
 	console.log("Request handler 'start' was called.");
 
-	/*
+	/*1. sleep function. // for testing blocking code.
+
 	function sleep(milliSeconds) {
 		var startTime = new Date().getTime();
 		while (new Date().getTime() < startTime + milliSeconds);
 	}
 	sleep(10000);
+
+	*/
+	
+	/*2. exec("watch date", function(error, stdout, stderr){
+		response.writeHead(200, {"Content-Type":"text/plain"});
+		response.write(stdout);
+		response.end();
+		//console.log("stdout : "+stdout);
+	});
 	*/
 
-	return "Hello Start.";
+	var body = '<html>'+
+	'<head>'+
+	'<meta http-equiv="Content-Type" content="text/html; '+
+	'charset=UTF-8" />'+
+	'</head>'+
+	'<body>'+
+	'<form action="/upload" method="post">'+
+	'<textarea name="text" rows="20" cols="60"></textarea>'+
+	'<input type="submit" value="Submit text" />'+
+	'</form>'+
+	'</body>'+
+	'</html>';
+	response.writeHead(200, {"Content-Type": "text/html"});
+	response.write(body);
+	response.end();
 }
 
 
-function upload() {
+function upload(response) {
 	console.log("Request handler 'upload' was called.");
-	return "Hello Upload.";
+	response.writeHead(200, {"Content-Type":"text/plain"});
+	response.write("Hello Upload");
+	response.end();
 }
 
 
