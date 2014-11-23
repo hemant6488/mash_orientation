@@ -1,9 +1,10 @@
 //requestHandler file, handles various requests based on the url and returns content.
 
+var queryString = require("querystring");
 var exec = require("child_process").exec;
+var mysqlConn = require("./mysqlConn");
 
-
-function start(response) {
+function start(response, postData, execQuery) {
 	console.log("Request handler 'start' was called.");
 
 	/*1. sleep function. // for testing blocking code.
@@ -42,11 +43,12 @@ function start(response) {
 }
 
 
-function upload(response) {
+function upload(response, postData, execQuery) {
 	console.log("Request handler 'upload' was called.");
-	response.writeHead(200, {"Content-Type":"text/plain"});
-	response.write("Hello Upload");
-	response.end();
+	execQuery("select * from people", response); //pass the response object so that this function in itself can print out the response.
+	//console.log("reuslts: " + json);
+	//response.write(json); //undefined
+	//response.end();
 }
 
 
