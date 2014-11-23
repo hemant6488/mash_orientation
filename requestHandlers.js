@@ -2,7 +2,6 @@
 
 var queryString = require("querystring");
 var exec = require("child_process").exec;
-var mysqlConn = require("./mysqlConn");
 
 function start(response, postData, execQuery) {
 	console.log("Request handler 'start' was called.");
@@ -31,9 +30,9 @@ function start(response, postData, execQuery) {
 	'charset=UTF-8" />'+
 	'</head>'+
 	'<body>'+
-	'<form action="/upload" method="post">'+
-	'<textarea name="text" rows="20" cols="60"></textarea>'+
-	'<input type="submit" value="Submit text" />'+
+	'<form action="/displayResults" method="post">'+
+	'<textarea name="text" rows="2" cols="80"></textarea><br />'+
+	'<input type="submit" value="Execute Query" />'+
 	'</form>'+
 	'</body>'+
 	'</html>';
@@ -43,9 +42,9 @@ function start(response, postData, execQuery) {
 }
 
 
-function upload(response, postData, execQuery) {
-	console.log("Request handler 'upload' was called.");
-	execQuery("select * from people", response); //pass the response object so that this function in itself can print out the response.
+function displayResults(response, postData, execQuery) {
+	console.log("Request handler 'displayResults' was called.");
+	execQuery(queryString.parse(postData).text, response); //pass the response object so that this function in itself can print out the response.
 	//console.log("reuslts: " + json);
 	//response.write(json); //undefined
 	//response.end();
@@ -53,4 +52,4 @@ function upload(response, postData, execQuery) {
 
 
 exports.start = start;
-exports.upload = upload;
+exports.displayResults = displayResults;
