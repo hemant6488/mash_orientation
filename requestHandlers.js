@@ -2,6 +2,7 @@
 
 var queryString = require("querystring");
 var exec = require("child_process").exec;
+var fs =  require("fs");
 
 function start(response, postData, execQuery) {
 	console.log("Request handler 'start' was called.");
@@ -24,7 +25,7 @@ function start(response, postData, execQuery) {
 	});
 	*/
 
-	var body = '<html>'+
+	/*var body = '<html>'+
 	'<head>'+
 	'<meta http-equiv="Content-Type" content="text/html; '+
 	'charset=UTF-8" />'+
@@ -36,15 +37,36 @@ function start(response, postData, execQuery) {
 	'</form>'+
 	'</body>'+
 	'</html>';
-	response.writeHead(200, {"Content-Type": "text/html"});
-	response.write(body);
-	response.end();
+	*/
+
+	exec("ls", function(error, stdout, stderr){
+		
+		console.log("stdout : "+stdout);
+	});
+
+	//read the html file to be parsed in the browser. readfile('file.html', callbackFunction());
+	fs.readFile('./index.html', function (err, html){
+		if (err){throw err;}
+		//write fs
+		// console.log(fs);
+		response.writeHead(200, {"Content-Type": "text/html"});
+		response.write(html);
+		response.end();
+	}); 
+
+	
 }
 
 
 function displayResults(response, postData, execQuery) {
 	console.log("Request handler 'displayResults' was called.");
-	execQuery(queryString.parse(postData).text, response); //pass the response object so that this function in itself can print out the response.
+	
+	var query = queryString.parse(postData).text;
+	
+	//if query is empty, put a default query to show data bases.
+	if(query === ""){query += "show databases;"};
+	console.log("Query in displayResults is: "+query);
+	execQuery(query, response); //pass the response object so that this function in itself can print out the response.
 	//console.log("reuslts: " + json);
 	//response.write(json); //undefined
 	//response.end();

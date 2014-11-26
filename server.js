@@ -37,6 +37,7 @@ function start(route, handle, execQuery){ //start function, so that we can start
 
 		//end data listener.
 		request.addListener("end", function(){
+			console.log("Final postData: "+postData);
 			route(handle, pathname, response, postData, execQuery);
 		})
 
