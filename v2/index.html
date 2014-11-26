@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>Hello World</title>
+	<h1><font color=Blue>Enter a query to execute</font></h1>
+	<script src="/index.js"></script>
+	
+
+	<script language="javascript">//AJAX, Asynchronous javascript and xml.
+	xmlhttp = new XMLHttpRequest(); //active http object.
+
+	function getResults(){//function called on click submit button.
+
+		var data = document.getElementById('inputQuery').value;
+
+		xmlhttp.open("POST", "/displayResults", true); //true for async call.
+		//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xmlhttp.send(data);
+
+		//ready state:
+		xmlhttp.onreadystatechange = function (){ //when the status changes, put the text into our division.
+
+			if(xmlhttp.readyState == 4 && xmlhttp.status==200){
+				document.getElementById('results').innerHTML = xmlhttp.responseText;
+			}
+			else
+				document.getElementById('results').innerHTML="<strong>waiting</strong>";
+		}
+
+		
+	}
+
+	</script>
+</head>
+<body>
+	
+	
+	<textarea id="inputQuery" name="text" rows="2" cols="80"></textarea><br />
+	<input type="submit" value="Execute Query" onclick="getResults()"/>
+
+	<br/><br/><br/><br/><br/><br/><br/><br/>
+	<br/>
+	<br/>
+	
+	<!--div for displaying data-->
+	<div id="results">
+	</div>
+
+
+</html>
