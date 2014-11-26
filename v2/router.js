@@ -17,7 +17,7 @@ function route(handle, pathname, response, request, execQuery) {
 	if (typeof handle[pathname] === 'function') { //if there exists a request handler then pass to it. //=== type conversion is done.	
 		return handle[pathname](response, request, execQuery); // passing the response object further to out requestHandlers. passing the postData received by a POST request, here sent from server.js.
 	}
-
+ 
 
 
 

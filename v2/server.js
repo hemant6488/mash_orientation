@@ -12,7 +12,7 @@ function start(route, handle, execQuery){ //start function, so that we can start
 		//response.write(content); // write output on the page.
 		//response.end();
 
-
+ 
 
 
 		//---------------------collecting postData-------------------------

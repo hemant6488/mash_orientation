@@ -27,4 +27,4 @@ function execQuery(queryStr, response){ // response object for writing stuff, be
 	
 }
 
-exports.execQuery = execQuery;
+exports.execQuery = execQuery; 

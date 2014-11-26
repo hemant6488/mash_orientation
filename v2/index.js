@@ -9,4 +9,4 @@ handle["/"] = requestHandlers.start; // associative array, values mapped to othe
 handle["/start"] = requestHandlers.start; //requestHndlers.start is a function that should be called when /start url is requested. function located in file requestHandlers.js
 handle["/displayResults"] = requestHandlers.displayResults;
 
-server.start(router.route, handle, mysqlConn.execQuery); //start the server -> server.js function used here., //passing execQuery just in case we need connect to mysql.ggit 
+server.start(router.route, handle, mysqlConn.execQuery); //start  the server -> server.js function used here., //passing execQuery just in case we need connect to mysql.ggit 
