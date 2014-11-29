@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Hello World</title>
+	<title>Webserver</title>
 	<h1><font color=Blue>Enter a query to execute</font></h1>
 	<script src="/index.js"></script>
 	
@@ -17,7 +17,7 @@
 		xmlhttp.send(data);
 
 		//ready state:
-		xmlhttp.onreadystatechange = function (){ //when the status changes,  put the text into our division.
+		xmlhttp.onreadystatechange = function (){ //when the status changes, put the text into our division.
 
 			if(xmlhttp.readyState == 4 && xmlhttp.status==200){
 				document.getElementById('results').innerHTML = xmlhttp.responseText;

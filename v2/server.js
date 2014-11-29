@@ -12,7 +12,12 @@ function start(route, handle, execQuery){ //start function, so that we can start
 		//response.write(content); // write output on the page.
 		//response.end();
 
- 
+		var ip = request.headers['x-forwarded-for'] || 
+    			 request.connection.remoteAddress || 
+    			 request.socket.remoteAddress ||
+    			 request.connection.socket.remoteAddress;
+
+    	console.log("Client Ip Address: "+ip);
 
 
 		//---------------------collecting postData-------------------------
